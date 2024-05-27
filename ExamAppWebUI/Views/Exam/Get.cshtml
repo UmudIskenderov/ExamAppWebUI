@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Exams";
+}
+
+@model ExamViewModel
+
+<h1>Exam List</h1>
+
+<table id="myTable" class="table table-striped table-bordered tbl">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Subject Code</th>
+            <th>Student Number</th>
+            <th>Date</th>
+            <th>Grade</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var exam in Model.Exams)
+        {
+            <tr>
+                <td>@exam.No</td>
+                <td>@exam.SubjectCode</td>
+                <td>@exam.StudentNumber</td>
+                <td>@exam.Date.ToString(SystemConstants.DateFormat)</td>
+                <td>@exam.Grade</td>
+                <td>
+                    <a asp-controller="Exam" asp-action="Create" asp-route-id="@exam.Id" class="btn btn-success">Update</a>
+                    <a class="btn btn-danger" data-toggle="modal" data-target="#deleteConfirmationModal" onclick="setExamId(@exam.Id)">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-controller="Exam" asp-action="Create" class="btn btn-primary m-2">Add</a>
+
+<partial name="DeleteConfirmation" />
+
+@section Scripts{
+
+    <script>
+        let examId = null;
+
+        function setExamId(id) {
+            examId = id;
+        }
+
+        // Handle the delete confirmation button click event
+        $("#confirmDeleteButton").on("click", function () {
+
+            $.ajax({
+                url: "/Exam/Delete/" + examId,
+                type: "DELETE",
+                success: function (response) {
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    var errorMessage = xhr.responseText; // Extract the error message from the response
+
+                    alert(errorMessage);
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $("#myTable").DataTable();
+        });
+    </script>
+}

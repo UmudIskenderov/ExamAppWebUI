@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Subjects";
+}
+
+@model SubjectModel
+
+@{
+    if (Model.Id == 0)
+    {
+        <h2>Add Subject</h2>
+    }
+    else
+    {
+        <h2>Update Subject</h2>
+    }
+}
+<form asp-controller="Subject" asp-action="Save">
+    <input asp-for="Id" hidden/>
+
+    <div class="form-group">
+        <label asp-for="Code">Code:</label>
+        <input type="text" class="form-control" asp-for="Code">
+        <span asp-validation-for="Code" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Name">Name:</label>
+        <input type="text" class="form-control" asp-for="Name">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Class">Class:</label>
+        <input type="number" step="any" class="form-control" asp-for="Class">
+        <span asp-validation-for="Class" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TeacherName">Teacher name:</label>
+        <input type="text" class="form-control" asp-for="TeacherName">
+        <span asp-validation-for="TeacherName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TeacherSurname">Teacher surname:</label>
+        <input type="text" class="form-control" asp-for="TeacherSurname">
+        <span asp-validation-for="TeacherSurname" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

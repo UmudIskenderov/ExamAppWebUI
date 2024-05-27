@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CorrelationId" Version="3.0.1" />
+    <PackageReference Include="Microsoft.IO.RecyclableMemoryStream" Version="3.0.0" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="5.3.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ExamAppDataAccess\ExamAppDataAccess.csproj" />
+    <ProjectReference Include="..\ExamAppEntities\ExamAppEntities.csproj" />
+  </ItemGroup>
+
+</Project>
